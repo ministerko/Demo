@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encryption Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center mb-6">Encryption in Action</h1>
+
+        <!-- Form to input new data -->
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">Add New Credit Data</h2>
+            <form action="/store_credit_data/" method="POST" class="space-y-4">
+                <input type="text" name="user_name" placeholder="Enter username" class="border p-2 rounded w-full" required />
+                <input type="text" name="credit_data" placeholder="Enter credit data" class="border p-2 rounded w-full" required />
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Store Data</button>
+            </form>
+        </div>
+
+        <!-- Display encrypted data -->
+        <div class="mt-6">
+            <h2 class="text-xl font-semibold mb-2">Stored Encrypted Credit Data</h2>
+            <table class="table-auto w-full text-left border-collapse">
+                <thead>
+                    <tr>
+                        <th class="border-b px-4 py-2">ID</th>
+                        <th class="border-b px-4 py-2">User Name</th>
+                        <th class="border-b px-4 py-2">Encrypted Credit Data</th>
+                        <th class="border-b px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td class="border-b px-4 py-2">{{ row['id'] }}</td>
+                            <td class="border-b px-4 py-2">{{ row['user_name'] }}</td>
+                            <td class="border-b px-4 py-2">{{ row['credit_data'] }}</td>
+                            <td class="border-b px-4 py-2">
+                                <a href="/get_credit_data/{{ row['user_name'] }}" class="text-blue-500">View Decrypted Data</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
